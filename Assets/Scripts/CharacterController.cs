@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Animations;
 //using UnityEditor.Animations;
 using UnityEngine;
@@ -17,17 +18,26 @@ public class CharacterController : MonoBehaviour
     //private bool battleWalk = true;
     //private bool battleRun = true;
 
-
-
-
-    public Animator animator;
-    public Rigidbody2D rb2D;
-
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime =  0.2f;
+    private float dashingCooldown = 1f;
 
     
+    [SerializeField] private Animator animator;  
+    [SerializeField] private Rigidbody2D rb2D;
+    [SerializeField] private TrailRenderer tr;
+
+
+
+    //public Animator animator;
+    //public Rigidbody2D rb2D;
+
+
+    [SerializeField] private LayerMask groundCheckLayer;
     public Transform groundCheckPosition;
     public float groundCheckRadius;
-    public LayerMask groundCheckLayer;
     public bool grounded;
     
 
@@ -50,7 +60,10 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (isDashing)
+        {
+            return;
+        }
 
         if (Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
         {
@@ -85,7 +98,6 @@ public class CharacterController : MonoBehaviour
                 moveSpeed = runSpeed;
                 Walk = false;
                 animator.SetBool("Run", true);
-                animator.SetBool("battleRun", true);
             }
             else
             {
@@ -96,25 +108,10 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //{
-        //    if (battleWalk)
-        //    {
-        //        moveSpeed = runSpeed;
-        //        battleWalk = false;
-        //        animator.SetBool("battleRun", true);
-
-
-        //    }
-        //    else
-        //    {
-        //        moveSpeed = walkSpeed;
-        //        Walk = true;
-        //        animator.SetBool("battleWalk", true);
-        //        animator.SetBool("Run", false);
-        //    }
-        //}
-
+        if (Input.GetKeyDown(KeyCode.RightShift)&& canDash)
+        {
+            StartCoroutine(Dash());
+        }
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
@@ -138,5 +135,29 @@ public class CharacterController : MonoBehaviour
         }
         
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+
+ 
+    }
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb2D.gravityScale;
+        rb2D.gravityScale = 0f;
+        rb2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rb2D.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
 }
