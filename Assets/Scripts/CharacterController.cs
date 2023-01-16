@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditor.Animations;
 //using UnityEditor.Animations;
 using UnityEngine;
 
@@ -28,21 +27,17 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Animator animator;  
     [SerializeField] private Rigidbody2D rb2D;
     [SerializeField] private TrailRenderer tr;
-
-
-
-    //public Animator animator;
-    //public Rigidbody2D rb2D;
-
-
-    [SerializeField] private LayerMask groundCheckLayer;
+    
+    
+    [SerializeField] private LayerMask groundCheckLayer;    
     public Transform groundCheckPosition;
     public float groundCheckRadius;
     public bool grounded;
     
-
-
-
+    
+    public AudioSource VoiceJump;
+    public AudioSource takeHitAudio;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -79,8 +74,15 @@ public class CharacterController : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1, 1);
-            animator.SetBool("Walk", true);
-
+            
+            if (animator.GetBool("battlePosition"))
+            {
+                animator.SetBool("battleWalk", true);
+            }
+            else
+            {
+                animator.SetBool("Walk", true);
+            }
         }
         else
         {
@@ -97,7 +99,15 @@ public class CharacterController : MonoBehaviour
             {
                 moveSpeed = runSpeed;
                 Walk = false;
-                animator.SetBool("Run", true);
+                if (animator.GetBool("battlePosition") == true)
+                {
+                    animator.SetBool("battleRun", true);
+                }
+                else
+                {
+                    animator.SetBool("Run", true);
+                }
+                        
             }
             else
             {
@@ -105,8 +115,11 @@ public class CharacterController : MonoBehaviour
                 Walk = true;
                 animator.SetBool("Walk", true);
                 animator.SetBool("Run", false);
+                animator.SetBool("battleRun", false);
             }
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.RightShift)&& canDash)
         {
@@ -117,6 +130,7 @@ public class CharacterController : MonoBehaviour
         {
             rb2D.velocity = new Vector2(0, jumpForce);
             animator.SetTrigger("Jump");
+            VoiceJump.Play();
 
         }
 
@@ -135,6 +149,8 @@ public class CharacterController : MonoBehaviour
         }
         
     }
+
+
 
     private void FixedUpdate()
     {
@@ -160,4 +176,5 @@ public class CharacterController : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
+
 }
