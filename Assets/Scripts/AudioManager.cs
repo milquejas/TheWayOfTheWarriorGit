@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private static AudioManager instance = null;
+    public static AudioManager Instance
     {
-        
+        get { return instance; }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            DontDestroyOnLoad(gameObject);
+            // Takes place only in the Main Scene
+        }
+
+
     }
 }

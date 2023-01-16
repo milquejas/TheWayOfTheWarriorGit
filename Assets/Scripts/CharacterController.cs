@@ -87,6 +87,7 @@ public class CharacterController : MonoBehaviour
         else
         {
             animator.SetBool("Walk", false);
+            animator.SetBool("battleWalk", false);
             if (grounded)
             {
                 animator.SetTrigger("Idle");
