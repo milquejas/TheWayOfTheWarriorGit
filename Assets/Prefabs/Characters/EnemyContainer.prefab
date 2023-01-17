@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_Name
-      value: EnemyContainer (1)
+      value: EnemyContainer
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_TagString
@@ -382,20 +382,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.014272213, y: 0.05708754}
   m_Size: {x: 0.69980717, y: 1.7706826}
   m_Direction: 0
---- !u!114 &1591620956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075049026921673526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9055a7d63b40b1c45b1a357b39a1860d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyActive: {fileID: 648042281}
-  BackgroundMusic: {fileID: 0}
 --- !u!4 &5075049027219077429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 831200758132842486, guid: d346654acba662f45afcecd754465067, type: 3}

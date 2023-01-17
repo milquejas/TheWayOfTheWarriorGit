@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
+    private float dashingPower = 30f;
     private float dashingTime =  0.2f;
     private float dashingCooldown = 1f;
 
@@ -167,8 +167,8 @@ public class CharacterController : MonoBehaviour
         canDash = false;
         isDashing = true;
         float originalGravity = rb2D.gravityScale;
-        rb2D.gravityScale = 0f;
-        rb2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rb2D.gravityScale = 0.2f;
+        rb2D.velocity = new Vector2(transform.localScale.x  * dashingPower, 0f );
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;

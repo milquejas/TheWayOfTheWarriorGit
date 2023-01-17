@@ -4,56 +4,124 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    float enemySpeed;
 
-    public AudioSource enemyActive;
-    public AudioSource BackgroundMusic; 
+    public Rigidbody2D rb2D;
+    private Animator animator;
 
-public class Enemy : MonoBehaviour
-{
-    public float enemySpeed = 3;
 
-    public AudioSource enemyActive;
-    public AudioSource BackgroundMusic;
+    [SerializeField]
+    private float minJumpForce = 5f, maxJumpForce = 40f;
 
-    void enemyMovement()
+    [SerializeField]
+    private float minWaitTime = 1.5f, maxWaitTime = 3.5f;
+
+    private float jumpTimer;
+
+    private bool canJump;
+
+    private void Awake()
     {
-        enemySpeed += 0.0001f;
-        transform.Translate(enemySpeed, 0, 0);
+        animator = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
-        enemyActive.GetComponent<AudioSource>();
-        BackgroundMusic.GetComponent<AudioSource>();
-        BackgroundMusic.Stop();
-        enemyActive.Play();
-        enemySpeed = 0f;
+        jumpTimer = Time.time + Random.Range(minWaitTime, maxWaitTime);
     }
 
-    void Update()
+    private void Update()
     {
-        enemyMovement();
-    }
-}
-
-void enemyMovement()
-    {
-        enemySpeed += 0.0001f;
-        transform.Translate(enemySpeed, 0, 0);
+        HandleJumping();
+        HandleAnimations();
     }
 
-    void Start()
+    void HandleAnimations()
     {
-        enemyActive.GetComponent<AudioSource>();
-        BackgroundMusic.GetComponent<AudioSource>();
-        BackgroundMusic.Stop();
-        enemyActive.Play();
-        enemySpeed = 0f;
+        if (rb2D.velocity.magnitude == 0)
+            animator.SetBool("Jump", false);
+        else
+            animator.SetBool("Jump", true);
     }
 
-    void Update()
+    void Jump()
     {
-        enemyMovement();
+        if (canJump)
+        {
+            canJump = false;
+            rb2D.velocity = new Vector2(0f, Random.Range(minJumpForce, maxJumpForce));
+        }
     }
-}
+
+    void HandleJumping()
+    {
+        if (Time.time > jumpTimer)
+        {
+            jumpTimer = Time.time + Random.Range(minWaitTime, maxWaitTime);
+            Jump();
+        }
+
+        if (rb2D.velocity.magnitude == 0) 
+        {
+            canJump = true;
+        }
+            
+    }
+
+} // class
+
+//public class EnemyMovement : MonoBehaviour
+//{
+//    float enemySpeed;
+
+//    public AudioSource enemyActive;
+//    public AudioSource BackgroundMusic; 
+
+//public class Enemy : MonoBehaviour
+//{
+//    public float enemySpeed = 3;
+
+//    public AudioSource enemyActive;
+//    public AudioSource BackgroundMusic;
+
+//    void enemyMovement()
+//    {
+//        enemySpeed += 0.0001f;
+//        transform.Translate(enemySpeed, 0, 0);
+//    }
+
+//    void Start()
+//    {
+//        enemyActive.GetComponent<AudioSource>();
+//        BackgroundMusic.GetComponent<AudioSource>();
+//        BackgroundMusic.Stop();
+//        enemyActive.Play();
+//        enemySpeed = 0f;
+//    }
+
+//    void Update()
+//    {
+//        enemyMovement();
+//    }
+//}
+
+//void enemyMovement()
+//    {
+//        enemySpeed += 0.0001f;
+//        transform.Translate(enemySpeed, 0, 0);
+//    }
+
+//    void Start()
+//    {
+//        enemyActive.GetComponent<AudioSource>();
+//        BackgroundMusic.GetComponent<AudioSource>();
+//        BackgroundMusic.Stop();
+//        enemyActive.Play();
+//        enemySpeed = 0f;
+//    }
+
+//    void Update()
+//    {
+//        enemyMovement();
+//    }
+//}
