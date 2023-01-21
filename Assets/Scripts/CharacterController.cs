@@ -7,15 +7,11 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 
 {
-
     public float moveSpeed;
     public float walkSpeed;
     public float runSpeed;
     public float jumpForce;
-
     private bool Walk = true;
-    //private bool battleWalk = true;
-    //private bool battleRun = true;
 
     private bool canDash = true;
     private bool isDashing;
@@ -42,17 +38,9 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(LogAfterSecond(5));
+
     }
 
-    //IEnumerator LogAfterSecond(float seconds)
-    //{
-    //    print("Timer Starts");
-    //    yield return null;
-    //    print("second passed");
-    //}
-
-    // Update is called once per frame
     void Update()
     {
         if (isDashing)

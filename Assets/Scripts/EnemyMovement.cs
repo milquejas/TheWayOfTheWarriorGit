@@ -5,123 +5,110 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public Rigidbody2D rb2D;
-    private Animator animator;
+    [Header("For Patrolling")]
+    [SerializeField] float moveSpeed;
+    private float moveDirection = 1;
+    private bool facingRight = true;
+    [SerializeField] Transform groundCheckPoint;
+    [SerializeField] Transform wallCheckPoint;
+    [SerializeField] LayerMask groundLayer;
+    public bool checkingGround;
+    public bool checkingWall;
 
+    [Header("For JumpAttack")]
+    [SerializeField] float jumpHeight;
+    [SerializeField] Transform player;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] Vector2 boxSize;
+    public bool isGrounded;
 
-    [SerializeField]
-    private float minJumpForce = 5f, maxJumpForce = 40f;
+    [Header("For SeeingPlayer")]
+    [SerializeField] Vector2 lineOfSite;
+    [SerializeField] LayerMask playerLayer;
+    private bool canSeePlayer;
 
-    [SerializeField]
-    private float minWaitTime = 1.5f, maxWaitTime = 3.5f;
+    [Header("Other")]
+    public Rigidbody2D enemyRB;
+    public float circleRadius = 0.2f;
 
-    private float jumpTimer;
-
-    private bool canJump;
-
-    private void Awake()
+    void Start()
     {
-        animator = GetComponent<Animator>();
-        rb2D = GetComponent<Rigidbody2D>();
+        enemyRB = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    //ToCallFunctions
+    void FixedUpdate()
     {
-        jumpTimer = Time.time + Random.Range(minWaitTime, maxWaitTime);
-    }
-
-    private void Update()
-    {
-        HandleJumping();
-        HandleAnimations();
-    }
-
-    void HandleAnimations()
-    {
-        if (rb2D.velocity.magnitude == 0)
-            animator.SetBool("Jump", false);
-        else
-            animator.SetBool("Jump", true);
-    }
-
-    void Jump()
-    {
-        if (canJump)
+        checkingGround = Physics2D.OverlapCircle(groundCheckPoint.position, circleRadius, groundLayer);
+        checkingWall = Physics2D.OverlapCircle(wallCheckPoint.position, circleRadius, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer );
+        canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSite, 0, playerLayer);
+        if(!canSeePlayer && isGrounded)
         {
-            canJump = false;
-            rb2D.velocity = new Vector2(0f, Random.Range(minJumpForce, maxJumpForce));
-        }
-    }
-
-    void HandleJumping()
-    {
-        if (Time.time > jumpTimer)
-        {
-            jumpTimer = Time.time + Random.Range(minWaitTime, maxWaitTime);
-            Jump();
-        }
-
-        if (rb2D.velocity.magnitude == 0) 
-        {
-            canJump = true;
-        }
+            Patrolling();
+            if (canSeePlayer)
+            {
+                JumpAttack();
+            }
             
+        }
+        
+    }
+    //ToWriteFunctions
+    void Patrolling()
+    {
+        if(!checkingGround || checkingWall)
+        {
+            if (facingRight)
+            {
+                Flip();
+            }
+            else if (!facingRight)
+            {
+                Flip();
+            }
+        }
+        enemyRB.velocity = new Vector2(moveSpeed * moveDirection, enemyRB.velocity.y);
     }
 
-} // class
+    void JumpAttack()
+    {
+        float distanceFromPlayer = player.position.x - transform.position.x;
 
-//public class EnemyMovement : MonoBehaviour
-//{
-//    float enemySpeed;
+        if (isGrounded)
+        {
+            enemyRB.AddForce(new Vector2(distanceFromPlayer, jumpHeight), ForceMode2D.Impulse);
+        }
+    }
 
-//    public AudioSource enemyActive;
-//    public AudioSource BackgroundMusic; 
+    void FlipTowardsPlayer()
+    {
+        float playerPosition = player.position.x - transform.position.x;
+        if (playerPosition < 0 && !facingRight)
+        {
+            Flip();          
+        }
+        else if (playerPosition > 0 && !facingRight)
+        {
+            Flip();
+        }
+    }
 
-//public class Enemy : MonoBehaviour
-//{
-//    public float enemySpeed = 3;
+    void Flip()
+    {
+        moveDirection *= -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
+    }
 
-//    public AudioSource enemyActive;
-//    public AudioSource BackgroundMusic;
-
-//    void enemyMovement()
-//    {
-//        enemySpeed += 0.0001f;
-//        transform.Translate(enemySpeed, 0, 0);
-//    }
-
-//    void Start()
-//    {
-//        enemyActive.GetComponent<AudioSource>();
-//        BackgroundMusic.GetComponent<AudioSource>();
-//        BackgroundMusic.Stop();
-//        enemyActive.Play();
-//        enemySpeed = 0f;
-//    }
-
-//    void Update()
-//    {
-//        enemyMovement();
-//    }
-//}
-
-//void enemyMovement()
-//    {
-//        enemySpeed += 0.0001f;
-//        transform.Translate(enemySpeed, 0, 0);
-//    }
-
-//    void Start()
-//    {
-//        enemyActive.GetComponent<AudioSource>();
-//        BackgroundMusic.GetComponent<AudioSource>();
-//        BackgroundMusic.Stop();
-//        enemyActive.Play();
-//        enemySpeed = 0f;
-//    }
-
-//    void Update()
-//    {
-//        enemyMovement();
-//    }
-//}
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(groundCheckPoint.position, circleRadius);
+        Gizmos.DrawWireSphere(wallCheckPoint.position, circleRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(groundCheck.position, boxSize);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, lineOfSite);
+    }
+}
