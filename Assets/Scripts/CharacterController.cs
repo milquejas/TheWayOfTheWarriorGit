@@ -43,10 +43,6 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
 
         if (Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
         {

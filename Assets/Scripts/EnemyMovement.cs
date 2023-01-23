@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Transform wallCheckPoint;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] float circleRadius;
     public bool checkingGround;
     public bool checkingWall;
 
@@ -20,7 +21,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] Transform groundCheck;
     [SerializeField] Vector2 boxSize;
-    public bool isGrounded;
+    private bool isGrounded;
+    
 
     [Header("For SeeingPlayer")]
     [SerializeField] Vector2 lineOfSite;
@@ -28,12 +30,13 @@ public class EnemyMovement : MonoBehaviour
     private bool canSeePlayer;
 
     [Header("Other")]
+    public Animator enemyAnim;
     public Rigidbody2D enemyRB;
-    public float circleRadius = 0.2f;
 
     void Start()
     {
-        enemyRB = GetComponent<Rigidbody2D>();
+        //enemyRB = GetComponent<Rigidbody2D>();
+        //enemyAnim = GetComponent<Animator>();
     }
 
     //ToCallFunctions
@@ -43,14 +46,20 @@ public class EnemyMovement : MonoBehaviour
         checkingWall = Physics2D.OverlapCircle(wallCheckPoint.position, circleRadius, groundLayer);
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer );
         canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSite, 0, playerLayer);
+        AnimationController();
+
         if(!canSeePlayer && isGrounded)
         {
-            Patrolling();
+            //Patrolling();
+
             if (canSeePlayer)
             {
-                JumpAttack();
+                FlipTowardsPlayer();
             }
-            
+            else if (!canSeePlayer && isGrounded)
+            {
+                Patrolling();
+            }
         }
         
     }
@@ -83,15 +92,15 @@ public class EnemyMovement : MonoBehaviour
 
     void FlipTowardsPlayer()
     {
-        float playerPosition = player.position.x - transform.position.x;
-        if (playerPosition < 0 && !facingRight)
-        {
-            Flip();          
-        }
-        else if (playerPosition > 0 && !facingRight)
-        {
-            Flip();
-        }
+        //float playerPosition = player.position.x - transform.position.x;
+        //if (playerPosition < 0 && facingRight)
+        //{
+        //    Flip();
+        //}
+        //else if (playerPosition > 0 && !facingRight)
+        //{
+        //    Flip();
+        //}
     }
 
     void Flip()
@@ -99,6 +108,12 @@ public class EnemyMovement : MonoBehaviour
         moveDirection *= -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+    }
+
+    void AnimationController()
+    {
+        enemyAnim.SetBool("canSeePlayer", canSeePlayer);
+        enemyAnim.SetBool("isGrounded", isGrounded);
     }
 
     private void OnDrawGizmosSelected()
