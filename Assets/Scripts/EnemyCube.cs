@@ -115,6 +115,9 @@ public class EnemyCube : MonoBehaviour
             Debug.Log("Enemy attacks!");
         }
     }
+
+   
+
     void Flip()
     {
         isFacingRight = !isFacingRight;

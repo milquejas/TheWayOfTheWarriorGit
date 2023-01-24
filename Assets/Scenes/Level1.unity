@@ -243,7 +243,8 @@ MonoBehaviour:
   moveSpeed: 3
   walkSpeed: 3
   runSpeed: 6
-  jumpForce: 31.8
+  jumpForce: 41.6
+  isAttacked: 0
   animator: {fileID: 318056598}
   rb2D: {fileID: 318056590}
   tr: {fileID: 318056601}
@@ -363,6 +364,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!114 &318056602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318056588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655ea9ae50db27d42aeaab0bcc82de5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacked: 0
 --- !u!4 &349462450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8818204291962987045, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}
@@ -1177,7 +1191,8 @@ GameObject:
   - component: {fileID: 1007660269}
   - component: {fileID: 1007660268}
   - component: {fileID: 1007660267}
-  m_Layer: 0
+  - component: {fileID: 1007660272}
+  m_Layer: 20
   m_Name: enemyCube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1332,8 +1347,21 @@ Transform:
   - {fileID: 1561306308}
   - {fileID: 1898130852}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007660272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007660266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dceb2ee6f159894cbc3a0cb62c883e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 318056600}
 --- !u!1 &1042380158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1373,7 @@ GameObject:
   - component: {fileID: 1042380161}
   - component: {fileID: 1042380160}
   - component: {fileID: 1042380159}
+  - component: {fileID: 1042380162}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1416,8 +1445,32 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1042380162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042380158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3b1ada23c6f994a98521342aa4995f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 318056599}
+  offset: {x: -4, y: -2.05, z: -10}
+  smoothSpeed: 0.125
+  minX: -500
+  maxX: 500
+  minY: -500
+  maxY: 500
+  zoomSpeed: 15.3
+  minZoom: 2
+  maxZoom: 50
+  zoomInDuration: 0.5
+  isAttacked: 0
 --- !u!1 &1055036750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1664,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1744,7 +1797,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1235753960 stripped
 Transform:
@@ -2116,7 +2169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1561306308}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -2221,7 +2274,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1598512740
 BoxCollider2D:
@@ -2332,7 +2385,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1688855013
 BoxCollider2D:
@@ -2503,7 +2556,7 @@ Transform:
   - {fileID: 978779904}
   - {fileID: 966753734}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1785115477 stripped
 Transform:
@@ -2762,7 +2815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1898130852}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: GroundCheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -2990,7 +3043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988294770}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -3276,7 +3329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_Name
-      value: CharacterContainer
+      value: Samurai
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_Layer
@@ -3666,7 +3719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5075049026921673524, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5075049026921673524, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}
       propertyPath: m_LocalPosition.x

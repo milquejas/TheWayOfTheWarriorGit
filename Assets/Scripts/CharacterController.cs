@@ -13,6 +13,8 @@ public class CharacterController : MonoBehaviour
     public float jumpForce;
     private bool Walk = true;
 
+    public bool isAttacked;
+
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 30f;
@@ -143,9 +145,14 @@ public class CharacterController : MonoBehaviour
         {
             return;
         }
-
- 
     }
+
+    public void TakeDamage()
+    {
+        isAttacked = true;
+    }
+
+
     private IEnumerator Dash()
     {
         canDash = false;
