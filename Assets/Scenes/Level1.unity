@@ -2403,17 +2403,25 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 318056588}
+    - target: {fileID: 1340662491, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
+      propertyPath: raycastDistance
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968264166261745225, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2836724546876585816, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2836724546876585816, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.65
+      value: -7.43
       objectReference: {fileID: 0}
     - target: {fileID: 2836724546876585816, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41
+      value: 4.49
       objectReference: {fileID: 0}
     - target: {fileID: 2836724546876585816, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2451,6 +2459,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySamurai
       objectReference: {fileID: 0}
+    - target: {fileID: 7003136735281465391, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003136735281465391, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.77
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e80dfccae86384a9937e5ebbd119e3, type: 3}
 --- !u!1001 &6697169000313477541
@@ -2460,6 +2476,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 318056600, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.24
+      objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166136, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_Name
       value: Samurai
@@ -2470,11 +2490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.71
+      value: -21.91
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.21
+      value: -0.92
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.z
