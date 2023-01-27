@@ -26,7 +26,7 @@ public class EnemyCube : MonoBehaviour
     public float wallCheckRadius;
     public bool isFacingRight;
     public bool isGrounded = true;
-    [SerializeField] Transform groundCheckPoint;
+    public Transform groundCheckPoint;
 
     void Start()
     {
