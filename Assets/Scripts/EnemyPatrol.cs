@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCube : MonoBehaviour
+public class EnemyPatrol : MonoBehaviour
 {
     public float jumpHeight;
     public float speed;
-    // time in seconds to wait before chasing the player again
-    
-    
-    public float attackDelay; 
-    private bool isAttacking;
-    private float attackTimer;
+    private float attackDelay = 10f;
+    private bool isAttacking;    
     public float attackRange;
     public float raycastDistance;
     public float patrolRange;
@@ -22,11 +18,12 @@ public class EnemyCube : MonoBehaviour
     public LayerMask wallLayer;
     public Transform groundCheck;
     public Transform wallCheck;
+    public Transform groundCheckPoint;
     public float groundCheckRadius;
     public float wallCheckRadius;
     public bool isFacingRight;
     public bool isGrounded = true;
-    public Transform groundCheckPoint;
+
 
     void Start()
     {
@@ -36,6 +33,7 @@ public class EnemyCube : MonoBehaviour
 
     void Update()
     {
+
 
         // Check if the enemy is grounded
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -54,6 +52,7 @@ public class EnemyCube : MonoBehaviour
         {
             // If the player is within the attack range, attack
             Attack();
+            StartCoroutine(AttackCoolDown());
         }
         else if (!isAttacking)
         {
@@ -66,25 +65,15 @@ public class EnemyCube : MonoBehaviour
         {
             Patrol();
         }
-        // if the enemy is attacking
-        if (isAttacking)
-        {
-            // decrease the attack timer
-            attackTimer -= Time.deltaTime;
-
-            // if the attack timer is less than 0
-            if (attackTimer < 0)
-            {
-                // set isAttacking to false
-                isAttacking = false;
-            }
-        }
     }
 
     void Patrol()
     {
+        //tarkastaa suunnan
+        Vector2 direction = isFacingRight ? Vector2.right : Vector2.left;
+
         // cast a ray from the enemy's position in the direction it is facing
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, isFacingRight ? Vector2.right : Vector2.left, raycastDistance, wallLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, raycastDistance, wallLayer);
 
         // if the raycast hits a wall
         if (hit.collider != null)
@@ -109,6 +98,7 @@ public class EnemyCube : MonoBehaviour
             // Get the horizontal direction towards the player
             float xDirection = (player.transform.position.x > transform.position.x) ? 1 : -1;
             // Calculate the jump velocity
+            
             Vector2 jumpVelocity = new Vector2(xDirection * jumpForce * distance, jumpForce);
             // Apply the jump velocity to the enemy's rigidbody
             rb.velocity = jumpVelocity;
@@ -116,6 +106,13 @@ public class EnemyCube : MonoBehaviour
         }
     }
 
+    IEnumerator AttackCoolDown()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
+        StopCoroutine(AttackCoolDown());
+    }
    
 
     void Flip()
