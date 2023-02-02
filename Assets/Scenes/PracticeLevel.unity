@@ -241,6 +241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 318056596, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 318056600, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: runSpeed
       value: 12
@@ -261,6 +265,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6697169001740166085, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
+      propertyPath: m_GravityScale
+      value: 6.58
+      objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166136, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_Name
       value: Samurai Variant
@@ -271,11 +279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.1
+      value: -12.9
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 6697169001740166138, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -376,11 +384,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f84d645c7e24e56428f1ba39d77f4829, type: 3}
---- !u!1 &1341042069 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6697169001740166136, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
-  m_PrefabInstance: {fileID: 756574113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1473449282
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +510,11 @@ PrefabInstance:
     - target: {fileID: 1841773297, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1341042069}
+      objectReference: {fileID: 1782049330}
+    - target: {fileID: 1841773297, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1841773297, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: wallCheckRadius
       value: 0.6
@@ -522,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1841773297, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: raycastPlayerDistance
-      value: 2.17
+      value: 7.87
       objectReference: {fileID: 0}
     - target: {fileID: 6131312311989916952, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: m_Name
@@ -534,11 +541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6131312311989916954, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.7
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 6131312311989916954, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.8
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6131312311989916954, guid: aa8099b67b6fac64282c86b0cfa047d4, type: 3}
       propertyPath: m_LocalPosition.z
