@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Ground
   - Wall
-  - 
+  - Terrain
   - 
   - 
   - 
@@ -29,7 +29,7 @@ TagManager:
   - 
   - Player
   - Enemy
-  - 
+  - Action
   - 
   - 
   - 
