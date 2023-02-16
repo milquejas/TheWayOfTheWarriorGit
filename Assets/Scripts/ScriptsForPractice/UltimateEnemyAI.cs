@@ -34,6 +34,54 @@ public class UltimateEnemyAI : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
     }
 
+    void Update()
+    {
+
+        // jos enemy näkee pelaajan alkaa chase
+        if (CanSeePlayer(chaseRange))
+        {
+            isChase = true;
+        }
+        else
+        {
+            // tässä toiminto isChase = true mutta pelaaja ei ole näkyvillä
+            if (isChase)
+            {
+                // enemy etsii pelaajaa
+                if (!isSearching)
+                {
+                    //jos ei löydä pelaajaa || Invoke Patrol
+                    isSearching = true;
+                    //jos toiminto toimisi niin enemy pitäisi etsiä 5 sekuntia pelaajaa ja sit invoke patrol
+                    Invoke(nameof(Patrol), 5f);
+                }
+
+            }
+
+        }
+        //tässä toiminto jos isChase = true, chase jatkuu ja pelaaja on näkyvissä
+        if (isChase)
+        {
+            ChasePlayer();
+        }
+
+        //määritys pelaajan ja enemyn väliselle etäisyydelle
+        float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+        //jos etäisyys pelaajaan on vähemmän kun annettu chaseRange arvo 
+        if (distToPlayer < chaseRange)
+        {
+            // ChasePlayer funktio
+            ChasePlayer();
+        }
+        else
+        {
+
+            // Stop funktio chase ja aloittaa patrol
+            Patrol();
+        }
+    }
+
     void Patrol()
     {
         isChase = false;
@@ -129,6 +177,13 @@ public class UltimateEnemyAI : MonoBehaviour
         }
         //Animator.Play("")
     }
+    void Flip()
+    {
+        // flip funktio
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0, 180, 0);
+
+    }
 
     //void Search()
     //{
@@ -171,13 +226,7 @@ public class UltimateEnemyAI : MonoBehaviour
 
 
 
-    void Flip()
-    {
-        // flip funktio
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0, 180, 0);
 
-    }
 
     //void FlipTowards()
     //{
@@ -201,51 +250,5 @@ public class UltimateEnemyAI : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
 
-        // jos enemy näkee pelaajan alkaa chase
-        if (CanSeePlayer(chaseRange))
-        {
-            isChase = true;
-        }
-        else
-        {
-            // tässä toiminto isChase = true mutta pelaaja ei ole näkyvillä
-            if (isChase)
-            {
-                // enemy etsii pelaajaa
-                if (!isSearching)
-                {
-                    //jos ei löydä pelaajaa || Invoke Patrol
-                    isSearching = true;
-                    //jos toiminto toimisi niin enemy pitäisi etsiä 5 sekuntia pelaajaa ja sit invoke patrol
-                    Invoke(nameof(Patrol), 5f);
-                }
-
-            }
-
-        }
-        //tässä toiminto jos isChase = true, chase jatkuu ja pelaaja on näkyvissä
-        if (isChase)
-        {
-            ChasePlayer();
-        }
-
-        //määritys pelaajan ja enemyn väliselle etäisyydelle
-        float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-
-        //jos etäisyys pelaajaan on vähemmän kun annettu chaseRange arvo 
-        if (distToPlayer < chaseRange)
-        {
-            // ChasePlayer funktio
-            ChasePlayer();
-        }
-        else
-        {
-            
-            // Stop funktio chase ja aloittaa patrol
-            Patrol();
-        }
-    }
 }
