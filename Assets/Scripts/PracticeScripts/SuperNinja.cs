@@ -27,7 +27,8 @@ public class SuperNinja : MonoBehaviour
     [SerializeField]
     private float direction;
 
-    public LayerMask groundLayer; 
+    public LayerMask groundLayer;
+    public LayerMask wallLayer;
 
 
     // Start is called before the first frame update
@@ -76,6 +77,7 @@ public class SuperNinja : MonoBehaviour
         
         // Raycast, real deal. Alaspäin suuntautuva
         RaycastHit2D hit = Physics2D.Raycast(detectionPoint.transform.position, Vector2.down, 1, groundLayer);
+
         if(hit.collider == null && !chasing && !tracking)
         {
             // Tämä if toteutuu vain jos säde ei osu mihinkään collideriin. Tällöin pitää vaihtaa suuntaa. 
@@ -85,15 +87,17 @@ public class SuperNinja : MonoBehaviour
 
         // Eteenpäin suuntautuva raycasti. 
         Debug.DrawRay(detectionPoint.transform.position, Vector2.right * forwardDetect * direction, Color.blue);
-       
-        RaycastHit2D hit2 = Physics2D.Raycast(detectionPoint.transform.position, new Vector2(direction, 0), forwardDetect, groundLayer);
-        
+
+        RaycastHit2D hit2 = Physics2D.Raycast(detectionPoint.transform.position,
+            new Vector2(direction, 0), forwardDetect, wallLayer);
+
         if (hit2.collider != null && !chasing && !tracking)
         {
 
             // Tämä if toteutuu vain jos säde osuu johonkin collideriin. Tällöin pitää vaihtaa suuntaa. 
             ChangeDirection();
         }
+
         else if (hit2.collider != null && chasing || hit2.collider != null && tracking)
         {
             Jump();
