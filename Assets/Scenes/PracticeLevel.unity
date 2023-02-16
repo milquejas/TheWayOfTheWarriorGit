@@ -636,7 +636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473449282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.2, y: -3.7, z: 0}
+  m_LocalPosition: {x: 46.29, y: -3.87, z: 0}
   m_LocalScale: {x: 1.274, y: 6.1311255, z: 1.274}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -741,7 +741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857395493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70000076, y: -0.9, z: -0.35307515}
+  m_LocalPosition: {x: 0.53, y: -0.65, z: -0.35307515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -776,7 +776,7 @@ MonoBehaviour:
   tracking: 0
   lastKnownPosition: {x: 0, y: 0, z: 0}
   chasing: 0
-  forwardDetect: 10.1
+  forwardDetect: 0
   player: {fileID: 2089088012}
   detectionPoint: {fileID: 1857395493}
   direction: 1
@@ -806,7 +806,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.02
+  m_Radius: 6.17
 --- !u!1001 &8110590491288363613
 PrefabInstance:
   m_ObjectHideFlags: 0
