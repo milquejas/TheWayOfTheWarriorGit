@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Enemy
   - Wall
+  - AddHealth
+  - AddMaxHealth
+  - LevelTrigger
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

@@ -79,7 +79,7 @@ public class GhostMovement : MonoBehaviour
         
         if(hit.collider == null && !chasing && !tracking)
         {
-            // Tämä if toteutuu vain jos säde osuu johonkin collideriin. Tällöin pitää vaihtaa suuntaa. 
+            // Tämä if toteutuu vain jos säde ei osuu johonkin collideriin. Tällöin pitää vaihtaa suuntaa. 
             ChangeDirection();
         }
 
@@ -150,7 +150,7 @@ public class GhostMovement : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             lastKnownPosition = player.transform.position;
-            player = null;
+            //player = null;
             chasing = false;
             forwardDetect = 0.1f;
             tracking = true;
