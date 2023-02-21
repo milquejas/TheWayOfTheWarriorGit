@@ -20,6 +20,9 @@ public class GhostMovement : MonoBehaviour
 
     public GameObject player;
     public Transform detectionPoint;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public bool isGrounded;
 
     // Suunta mihin ghost kulkee
     private bool changeDir;
@@ -47,7 +50,10 @@ public class GhostMovement : MonoBehaviour
 
         if (tracking)
         {
-            if(Mathf.Abs(transform.position.x - lastKnownPosition.x)< 2)
+            //katsotaan tässä, että milloin ollaan alle x:nro yksikön päässä siitä viimeksi tiedetystä sijainnista
+            //eli siis sen lähemmäks enemy menee viimeksi tiedettyä sijaintia ja lopettaa trackaamisen,
+            //mitä pienempi numero x arvolle annetaan.
+            if (Mathf.Abs(transform.position.x - lastKnownPosition.x)< 0.3)
             {
                 tracking= false;
             }
@@ -73,13 +79,16 @@ public class GhostMovement : MonoBehaviour
         //}
         //tämä raycast pelkästään visualisointiin
         Debug.DrawRay(detectionPoint.transform.position, Vector2.down, Color.green);
-
+        
+        // tämä on collider mikä tarkastaa onko grounded ja estää enemya pyörimästä ilmassa. 
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        
         //tämä raycast tarkastaa groundin
         RaycastHit2D hit = Physics2D.Raycast(detectionPoint.transform.position, Vector2.down, 1, groundLayer);
         
-        if(hit.collider == null && !chasing && !tracking)
+        if(hit.collider == null && !chasing && !tracking && isGrounded)
         {
-            // Tämä if toteutuu vain jos säde ei osuu johonkin collideriin. Tällöin pitää vaihtaa suuntaa. 
+            // Tämä if toteutuu vain jos säde ei osu johonkin collideriin. Tällöin pitää vaihtaa suuntaa. 
             ChangeDirection();
         }
 

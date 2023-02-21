@@ -35,9 +35,7 @@ public class CharacterController : MonoBehaviour
     public bool grounded;
 
     public Image filler;
-    public float health;
-    public float previousHealth;
-    public float maxHealth;
+    
 
     //laskee nollasta kahteen ja aloittaa alusta
     public float counter;
@@ -150,7 +148,8 @@ public class CharacterController : MonoBehaviour
         }
         if(counter > maxCounter)
         {
-            previousHealth = health;
+            
+            GameManager.manager.previousHealth = GameManager.manager.health;
             counter = 0;
 
         }
@@ -159,8 +158,13 @@ public class CharacterController : MonoBehaviour
             counter += Time.deltaTime;
         }
 
-        filler.fillAmount = Mathf.Lerp(previousHealth / maxHealth, health / maxHealth, counter / maxCounter);
+        filler.fillAmount = Mathf.Lerp(GameManager.manager.previousHealth / GameManager.manager.maxHealth, 
+            GameManager.manager.health / GameManager.manager.maxHealth, counter / maxCounter);
 
+        if (gameObject.transform.position.y < -20)
+        {
+            Die();
+        }
     }
 
 
@@ -177,7 +181,7 @@ public class CharacterController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("osuma");
+            Debug.Log("Osuma");
             TakeDamage(20);
         }
     }
@@ -193,7 +197,7 @@ public class CharacterController : MonoBehaviour
         if (collision.CompareTag("AddMaxHealth"))
         {
             Destroy(collision.gameObject);
-            Heal(50);
+            AddMaxHealth(50);
         }
 
         if (collision.CompareTag("LevelEnd")) 
@@ -204,26 +208,43 @@ public class CharacterController : MonoBehaviour
 
     private void AddMaxHealth(float amt)
     {
-        maxHealth += amt;
+        GameManager.manager.maxHealth += amt;
     }
 
     private void Heal(float amt)
     {
-        previousHealth = filler.fillAmount * maxHealth;
+        GameManager.manager.previousHealth = filler.fillAmount * GameManager.manager.maxHealth;
         counter = 0;
-        health += amt;
-        if (health > maxHealth)
+        GameManager.manager.health += amt;
+        if (GameManager.manager.health > GameManager.manager.maxHealth)
         {
-            health = maxHealth;
+            GameManager.manager.health = GameManager.manager.maxHealth;
         }
     }
 
     private void TakeDamage(float dmg)
     {
         isAttacked = true;
-        previousHealth = filler.fillAmount * maxHealth;
+        GameManager.manager.previousHealth = filler.fillAmount * GameManager.manager.maxHealth;
         counter = 0;
-        health -= dmg;
+        GameManager.manager.health -= dmg;
+
+        if (GameManager.manager.health < 0)
+        {
+
+            Die();
+
+        }
+    }
+
+    public void Die()
+    {
+        GameManager.manager.currentLevel = GameManager.manager.previousLevel;
+        GameManager.manager.health = GameManager.manager.historyHealth;
+        GameManager.manager.previousHealth = GameManager.manager.historyPreviousHealth;
+        GameManager.manager.maxHealth = GameManager.manager.historyMaxHealth;
+        SceneManager.LoadScene("Map");
+
     }
 
 

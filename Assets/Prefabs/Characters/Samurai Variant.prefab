@@ -420,11 +420,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522039, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522039, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522039, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_LocalPosition.z
@@ -882,6 +882,9 @@ MonoBehaviour:
   groundCheckPosition: {fileID: 1055036751}
   groundCheckRadius: 0.48
   grounded: 0
+  filler: {fileID: 0}
+  counter: 0
+  maxCounter: 2
   VoiceJump: {fileID: 520586479}
   takeHitAudio: {fileID: 0}
 --- !u!114 &318056602
