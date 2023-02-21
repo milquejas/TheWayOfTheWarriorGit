@@ -13,6 +13,8 @@ public class MapCharacter : MonoBehaviour
     {
         if (GameManager.manager.currentLevel != "") 
         {
+            //jokin taso on p‰‰sty l‰pi
+            GameObject.Find(GameManager.manager.currentLevel).GetComponent<LoadLevel>().Cleared(true);
             //currentLevel on jotain muuta kuin tyhj‰.
             //asetetaan pelaajalle uusi sijainti
             transform.position = GameObject.Find(GameManager.manager.currentLevel).transform.GetChild(0).transform.position;

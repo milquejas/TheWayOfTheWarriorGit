@@ -10,4 +10,12 @@ public class MenuControl : MonoBehaviour
         //playe paniketta painettu valikossa
         SceneManager.LoadScene("Map");
     }
+    public void Save()
+    {
+        GameManager.manager.Save();
+    }
+    public void Load()
+    {
+        GameManager.manager.Load();
+    }
 }
