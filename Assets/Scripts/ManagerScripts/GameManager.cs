@@ -81,11 +81,15 @@ public class GameManager : MonoBehaviour
         data.health = health;
         data.previousHealth = previousHealth;
         data.maxHealth = maxHealth;
-        data.currentLevel = currentLevel;
+        
+        //data.historyHealth = historyHealth;
+        //data.historyPreviousHealth = historyPreviousHealth;
+        //data.historyMaxHealth = historyMaxHealth;
         data.LevelFirst = LevelFirst;
         data.Level2 = Level2;
         data.Level3 = Level3;
         data.Level4 = Level4;
+        data.currentLevel = currentLevel;
         bf.Serialize(file, data);
         file.Close();
     }
@@ -105,6 +109,9 @@ public class GameManager : MonoBehaviour
             previousHealth = data.previousHealth;
             maxHealth = data.maxHealth;           
             LevelFirst = data.LevelFirst;
+            //historyHealth = data.historyHealth;
+            //historyPreviousHealth = data.historyPreviousHealth;
+            //historyMaxHealth = data.historyMaxHealth;
             Level2 = data.Level2;
             Level3 = data.Level3;
             Level4 = data.Level4;
@@ -118,12 +125,16 @@ public class GameManager : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-   
+    public string currentLevel;
     public float health;
     public float previousHealth;
     public float maxHealth;
 
-    public string currentLevel;
+    //public float historyHealth;
+    //public float historyPreviousHealth;
+    //public float historyMaxHealth;
+
+    
     public bool LevelFirst;
     public bool Level2;
     public bool Level3;

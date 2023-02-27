@@ -50,7 +50,11 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
+        GameManager.manager.historyHealth = GameManager.manager.health;
+        GameManager.manager.historyPreviousHealth = GameManager.manager.previousHealth;
+        GameManager.manager.historyMaxHealth = GameManager.manager.maxHealth;
     }
 
     void Update()

@@ -152,10 +152,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8718cde8f5bcbf54cb496ffdd87de529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 
   health: 200
   previousHealth: 200
   maxHealth: 200
+  historyHealth: 0
+  historyPreviousHealth: 0
+  historyMaxHealth: 0
+  previousLevel: 
+  currentLevel: 
+  LevelFirst: 0
+  Level2: 0
+  Level3: 0
+  Level4: 0
 --- !u!4 &888763061
 Transform:
   m_ObjectHideFlags: 0
