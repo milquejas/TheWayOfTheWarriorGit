@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301cdd02faea04845b601901731d8b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Level1
+  levelToLoad: LevelFirst
   cleared: 0
 --- !u!58 &2662085751249476164
 CircleCollider2D:

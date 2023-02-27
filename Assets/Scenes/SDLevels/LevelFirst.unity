@@ -612,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundMusic
       objectReference: {fileID: 0}
+    - target: {fileID: 6522018202819587467, guid: 83d6d0eadf0eca4498388f4065e750ca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6522018202819587468, guid: 83d6d0eadf0eca4498388f4065e750ca, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1093,23 +1097,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}
---- !u!1 &1566367518 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5075049026921673526, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}
-  m_PrefabInstance: {fileID: 1518909192}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1566367519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566367518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80cc10a44a53e8b499c98e94b2a3a922, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1566367525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5075049026921673524, guid: 4ad4f93df73953c4e893b9e08a64995c, type: 3}

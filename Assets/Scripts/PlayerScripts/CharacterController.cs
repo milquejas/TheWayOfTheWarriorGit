@@ -34,12 +34,10 @@ public class CharacterController : MonoBehaviour
     public float groundCheckRadius;
     public bool grounded;
 
+    // healtbar 
     public Image filler;
-    
-
     //laskee nollasta kahteen ja aloittaa alusta
     public float counter;
-
     //2sec, määrittää sen kuinka nopeasti healthbar liikkuu uuteen aarvoon
     public float maxCounter;
 
@@ -146,7 +144,8 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("battlePosition", false);
             animator.SetBool("takeWeapon", false);
         }
-        if(counter > maxCounter)
+        // TÄMÄ luo counterille laskurin, joka kasvaa maxCounteriin ja aloittaa uudestaan 0:sta. 
+        if (counter > maxCounter)
         {
             
             GameManager.manager.previousHealth = GameManager.manager.health;

@@ -92,7 +92,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_Name
-      value: GhostNinja
+      value: EnemyContainer
       objectReference: {fileID: 0}
     - target: {fileID: 831200758371522037, guid: d346654acba662f45afcecd754465067, type: 3}
       propertyPath: m_TagString
@@ -274,7 +274,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.02
+  m_Radius: 7
 --- !u!114 &2099196528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   chasing: 0
   forwardDetect: 2
   dead: 0
-  player: {fileID: 0}
+  player: {fileID: 6697169001740166136, guid: ae4ad7eab9ff6f842993f529aeb927b7, type: 3}
   detectionPoint: {fileID: 1545127620}
   groundCheck: {fileID: 1545127620}
   groundCheckRadius: 0.2

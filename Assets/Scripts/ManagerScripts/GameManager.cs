@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager manager;
 
-    public string previousLevel;
-    public string currentLevel;
-
     public float health;
     public float previousHealth;
     public float maxHealth;
@@ -23,6 +20,9 @@ public class GameManager : MonoBehaviour
     public float historyHealth;
     public float historyPreviousHealth;
     public float historyMaxHealth;
+
+    public string previousLevel;
+    public string currentLevel;
 
     //jokaista tasoa varten on muuttuja. muuttujan nimen pit‰‰ olla sama kuin loadlevele scriptiss‰ olevan muuttujan arvo.
     public bool LevelFirst;
@@ -55,10 +55,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
+        //if(Input.GetKeyDown(KeyCode.M))
+        //{
+        //    SceneManager.LoadScene("MainMenu");
+        //}
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            SceneManager.LoadScene("MainMenu");
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "Map")
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
+
     }
 
     // kaksi toimintoa, save ja load
@@ -93,12 +103,12 @@ public class GameManager : MonoBehaviour
             //siirret‰‰n ladattu info Game manageriin
             health = data.health;
             previousHealth = data.previousHealth;
-            maxHealth = data.maxHealth;
-            currentLevel = data.currentLevel;
+            maxHealth = data.maxHealth;           
             LevelFirst = data.LevelFirst;
             Level2 = data.Level2;
             Level3 = data.Level3;
             Level4 = data.Level4;
+            currentLevel = data.currentLevel;
         }
     }
 
