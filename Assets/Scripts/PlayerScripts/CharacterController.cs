@@ -38,7 +38,7 @@ public class CharacterController : MonoBehaviour
     public Image filler;
     //laskee nollasta kahteen ja aloittaa alusta
     public float counter;
-    //2sec, m‰‰ritt‰‰ sen kuinka nopeasti healthbar liikkuu uuteen aarvoon
+    //2sec, m‰‰ritt‰‰ sen kuinka nopeasti healthbar liikkuu uuteen arvoon
     public float maxCounter;
 
 
