@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
     public float walkSpeed;
     public float runSpeed;
     public float jumpForce;
-    private bool Walk = true;
+    private bool walk = true;
 
     public bool isAttacked;
 
@@ -96,10 +96,10 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (Walk)
+            if (walk)
             {
                 moveSpeed = runSpeed;
-                Walk = false;
+                walk = false;
                 if (animator.GetBool("battlePosition") == true)
                 {
                     animator.SetBool("battleRun", true);
@@ -113,7 +113,7 @@ public class CharacterController : MonoBehaviour
             else
             {
                 moveSpeed = walkSpeed;
-                Walk = true;
+                walk = true;
                 animator.SetBool("Walk", true);
                 animator.SetBool("Run", false);
                 animator.SetBool("battleRun", false);
